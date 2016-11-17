@@ -102,7 +102,9 @@ class IRCMessage(NotificationPlugin):
 
     def send_payload(self, project, message):
         server = self.get_option('server', project)
-        port = self.get_option('port', project)
+        port = int(self.get_option('port', project))
+        if port == 0:
+            return
         nick = self.get_option('nick', project)
         rooms = self.get_option('room', project) or ''
         without_join = self.get_option('without_join', project)
